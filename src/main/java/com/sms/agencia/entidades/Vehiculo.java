@@ -8,11 +8,13 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Vehiculo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected int id;
 	protected String marca;
+	@Column(unique = true)
+	protected String modelo;
 	protected String color;
 	protected int stock;
 	@Column(columnDefinition = "decimal(10,2)")
@@ -21,8 +23,9 @@ public class Vehiculo {
 	public Vehiculo() {
 	}
 
-	public Vehiculo(String marca, String color, int stock, float precio) {
+	public Vehiculo(String marca, String modelo, String color, int stock, float precio) {
 		this.marca = marca;
+		this.modelo = modelo;
 		this.color = color;
 		this.stock = stock;
 		this.precio = precio;
@@ -68,13 +71,18 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
 	@Override
 	public String toString() {
 		return "Vehiculo [id=" + id + ", marca=" + marca + ", color=" + color + ", stock=" + stock + ", precio="
 				+ precio + "]";
 	}
-	
-	
-	
 
 }

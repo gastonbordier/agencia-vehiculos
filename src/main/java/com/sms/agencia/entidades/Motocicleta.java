@@ -9,10 +9,9 @@ public class Motocicleta extends Vehiculo {
 	public Motocicleta() {
 	}
 
-	public Motocicleta(String marca, String color, int stock, float precio, int cilindrada) {
-		super(marca, color, stock, precio);
+	public Motocicleta(String marca, String modelo, String color, int stock, float precio, int cilindrada) {
+		super(marca, modelo, color, stock, precio);
 		this.cilindrada = cilindrada;
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getCilindrada() {
@@ -28,7 +27,5 @@ public class Motocicleta extends Vehiculo {
 		return "Motocicleta [id=" + id + ", marca=" + marca + ", color=" + color + ", stock=" + stock + ", precio="
 				+ precio + ", cilindrada=" + cilindrada + "]";
 	}
-	
-	
 
 }

@@ -10,9 +10,11 @@ public class Camioneta extends Automovil {
 	public Camioneta() {
 	}
 
-	public Camioneta(int cantidadRuedas, int cantidadPuertas, int capacidadOcupantes, String tipoCombustible,
-			int taraToneladas, int capacidadToneladas) {
-		super(cantidadRuedas, cantidadPuertas, capacidadOcupantes, tipoCombustible);
+	public Camioneta(String marca, String modelo, String color, int stock, float precio, int cantidadRuedas,
+			int cantidadPuertas, int capacidadOcupantes, String tipoCombustible, int taraToneladas,
+			int capacidadToneladas) {
+		super(marca, modelo, color, stock, precio, cantidadRuedas, cantidadPuertas, capacidadOcupantes,
+				tipoCombustible);
 		this.taraToneladas = taraToneladas;
 		this.capacidadToneladas = capacidadToneladas;
 	}
@@ -41,5 +43,4 @@ public class Camioneta extends Automovil {
 				+ ", taraToneladas=" + taraToneladas + ", capacidadToneladas=" + capacidadToneladas + "]";
 	}
 
-	
 }

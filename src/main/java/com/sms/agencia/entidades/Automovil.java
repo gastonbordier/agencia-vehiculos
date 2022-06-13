@@ -12,7 +12,9 @@ public class Automovil extends Vehiculo {
 	public Automovil() {
 	}
 
-	public Automovil(int cantidadRuedas, int cantidadPuertas, int capacidadOcupantes, String tipoCombustible) {
+	public Automovil(String marca, String modelo, String color, int stock, float precio, int cantidadRuedas,
+			int cantidadPuertas, int capacidadOcupantes, String tipoCombustible) {
+		super(marca, modelo, color, stock, precio);
 		this.cantidadRuedas = cantidadRuedas;
 		this.cantidadPuertas = cantidadPuertas;
 		this.capacidadOcupantes = capacidadOcupantes;
@@ -58,5 +60,4 @@ public class Automovil extends Vehiculo {
 				+ ", capacidadOcupantes=" + capacidadOcupantes + ", tipoCombustible=" + tipoCombustible + "]";
 	}
 
-	
 }

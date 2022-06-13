@@ -6,12 +6,14 @@ import javax.persistence.Entity;
 public class Sedan extends Automovil {
 	private boolean esDescapotable;
 
+	
+
 	public Sedan() {
 	}
 
-	public Sedan(int cantidadRuedas, int cantidadPuertas, int capacidadOcupantes, String tipoCombustible,
-			boolean esDescapotable) {
-		super(cantidadRuedas, cantidadPuertas, capacidadOcupantes, tipoCombustible);
+	public Sedan(String marca, String modelo, String color, int stock, float precio, int cantidadRuedas,
+			int cantidadPuertas, int capacidadOcupantes, String tipoCombustible, boolean esDescapotable) {
+		super(marca, modelo, color, stock, precio, cantidadRuedas, cantidadPuertas, capacidadOcupantes, tipoCombustible);
 		this.esDescapotable = esDescapotable;
 	}
 
