@@ -1,6 +1,8 @@
-package com.sms.agencia.entidades;
+package com.sms.agencia.dataSedanes;
 
 import javax.persistence.Entity;
+
+import com.sms.agencia.entidades.Automovil;
 
 @Entity
 public class Sedan extends Automovil {

@@ -1,4 +1,4 @@
-package com.sms.agencia.controllers;
+package com.sms.agencia;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,8 +1,6 @@
-package com.sms.agencia.repository;
+package com.sms.agencia.dataSedanes;
 
 import org.springframework.data.repository.CrudRepository;
-
-import com.sms.agencia.entidades.Sedan;
 
 public interface SedanRepository extends CrudRepository<Sedan, Integer>{
 }

@@ -1,4 +1,4 @@
-package com.sms.agencia.controllers;
+package com.sms.agencia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sms.agencia.entidades.Motocicleta;
-import com.sms.agencia.repository.MotocicletaRepository;
+import com.sms.agencia.dataMotocicletas.Motocicleta;
+import com.sms.agencia.dataMotocicletas.MotocicletaRepository;
 
 @Controller
 @RequestMapping("/motocicletas")

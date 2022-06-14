@@ -1,4 +1,4 @@
-package com.sms.agencia.controllers;
+package com.sms.agencia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,15 +6,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.sms.agencia.entidades.Motocicleta;
-import com.sms.agencia.entidades.Sedan;
+import com.sms.agencia.dataMotocicletas.Motocicleta;
+import com.sms.agencia.dataMotocicletas.MotocicletaRepository;
+import com.sms.agencia.dataSedanes.SedanRepository;
 import com.sms.agencia.repository.CamionetaRepository;
-import com.sms.agencia.repository.MotocicletaRepository;
-import com.sms.agencia.repository.SedanRepository;
 
 @SpringBootApplication
-@EntityScan("com.sms.agencia.entidades")
-@EnableJpaRepositories("com.sms.agencia.repository")
+//@EntityScan("com.sms.agencia.entidades")
+//@EnableJpaRepositories("com.sms.agencia.repository")
 public class AgenciaApplication {
 
 	public static void main(String[] args) {
