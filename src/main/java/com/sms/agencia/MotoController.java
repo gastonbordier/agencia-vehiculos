@@ -23,27 +23,74 @@ import com.sms.agencia.dataMotocicletas.MotocicletaRepository;
 @Controller
 @RequestMapping("/motocicletas")
 public class MotoController {
-	
+
 	private static Logger LOG = LoggerFactory.getLogger(AgenciaApplication.class);
 
 	@Autowired
 	private MotocicletaRepository repository;
 
+	private boolean editarMotocicleta = false;
+	private boolean agregarMotocicleta = false;
+
 	@GetMapping
 	public String getListadoMotos(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
 			Model model) {
-		List<Motocicleta> lista = repository.findAll();
-		model.addAttribute("lista", lista);
+		editarMotocicleta = false;
+		agregarMotocicleta = false;
+
+		model.addAttribute("edit", editarMotocicleta);
+		actualizarModelo(model);
 		return "motocicletas.html";
 	}
 
-	@PostMapping
-	public String setMotos(@ModelAttribute(name = "nombre")String nombre, Model model) {
-		
-		LOG.info("Nombre = "+nombre);
+	@PostMapping("/editar-eliminar")
+	public String obtenerPorId(@ModelAttribute(name = "id") String id, Model model) {
+
+		if (id.length() > 0) {
+
+			LOG.info("Nombre = " + id);
+			Motocicleta motocicletaEditable = repository.findById(Integer.parseInt(id));
+			LOG.info(motocicletaEditable.toString());
+			editarMotocicleta = true;
+			agregarMotocicleta = false;
+
+			model.addAttribute("marca", motocicletaEditable.getMarca());
+			model.addAttribute("modelo", motocicletaEditable.getModelo());
+			model.addAttribute("color", motocicletaEditable.getColor());
+			model.addAttribute("stock", motocicletaEditable.getStock());
+			model.addAttribute("precio", motocicletaEditable.getPrecio());
+			model.addAttribute("cilindrada", motocicletaEditable.getCilindrada());
+
+		}
+		actualizarModelo(model);
+		return "motocicletas.html";
+	}
+
+	@PostMapping("/agregar")
+	public String agregarMoto(Model model) {
+		agregarMotocicleta = true;
+		editarMotocicleta = false;
+
+		actualizarModelo(model);
+		return "motocicletas.html";
+	}
+
+	@PostMapping("motocicletas/editar-eliminar/cancelar")
+	public String cancelar(Model model) {
+		agregarMotocicleta = false;
+		editarMotocicleta = false;
+
+		actualizarModelo(model);
+		return "motocicletas.html";
+	}
+
+	private void actualizarModelo(Model model) {
+//		actualiza lista 
 		List<Motocicleta> lista = repository.findAll();
 		model.addAttribute("lista", lista);
-		return "motocicletas.html";
+//		actualiza modo de display
+		model.addAttribute("editarMotocicleta", editarMotocicleta);
+		model.addAttribute("agregarMotocicleta", agregarMotocicleta);
 	}
 
 }

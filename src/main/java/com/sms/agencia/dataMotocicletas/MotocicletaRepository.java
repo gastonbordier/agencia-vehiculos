@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MotocicletaRepository extends JpaRepository<Motocicleta, Integer>{
-	List<Motocicleta> findAll();
+//	List<Motocicleta> findAll();
 	List<Motocicleta> findAllByMarca(String marca);
 	Motocicleta findById(int id);
 }

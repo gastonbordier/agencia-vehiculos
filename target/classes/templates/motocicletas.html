@@ -10,7 +10,7 @@
   <title>Agencia de Autos - Motocicletas</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-  integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -112,7 +112,6 @@
     }
 
     .form-control-dark {
-      color: #fff;
       background-color: rgba(255, 255, 255, .1);
       border-color: rgba(255, 255, 255, .1);
     }
@@ -173,7 +172,7 @@
       </nav>
 
       <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-  
+
         <br>
         <br>
 
@@ -187,7 +186,7 @@
                 <th>Modelo</th>
                 <th>Color</th>
                 <th>Stock</th>
-                <th>Precio</th>                
+                <th>Precio</th>
                 <th>Cilindrada</th>
               </tr>
             </thead>
@@ -203,19 +202,78 @@
               </tr>
 
               <form action="" method="post"><button type="submit">Crear</button></form>
-              
+
               <!-- Borrar registro n°: <form method="post"><input type="text" th:object="*{nombre}"><button type="submit">Borrar</button></form> -->
               <br>
               <br>
-               <form method="post" th:action="@{/motocicletas}">
-                <input type="text" name="nombre" >
+              <!-- <form method="post" th:action="@{/motocicletas}">
+                <input type="text" name="nombre">
                 <button type="submit">hola</button>
-              </form>>
+              </form>> -->
 
 
             </tbody>
           </table>
         </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <form method="post" th:action="@{/motocicletas/editar-eliminar}">
+                <input type="text" input name="id" class="form-control form-control-dark bg-light"
+                  placeholder="Insertar id">
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Buscar vehiculo</button>
+              </form>
+              <form th:action="@{/motocicletas/agregar}" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Agregar vehiculo</button>
+              </form>
+            </div>
+
+
+            <div class="col-6" th:if="${editarMotocicleta || agregarMotocicleta}">
+              <input type="text" input name="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
+                th:value="${marca}">
+              <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
+                placeholder="Modelo" th:value="${modelo}">
+              <input type="text" input name="color" class="form-control form-control-dark bg-light" placeholder="Color"
+                th:value="${color}">
+              <input type="text" input name="stock" class="form-control form-control-dark bg-light" placeholder="Stock"
+                th:value="${stock}">
+              <input type="text" input name="precio" class="form-control form-control-dark bg-light"
+                placeholder="Precio" th:value="${precio}">
+              <div class="row" th:if="${editarMotocicleta}">
+                <div class="col">
+                  <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">Editar</button>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">Eliminar</button>
+                </div>
+                <div class="col">
+                  <form th:action="{@motocicletas/editar-eliminar/cancelar}" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
+                  </form>
+                </div>
+              </div>
+              <div class="row" th:if="${agregarMotocicleta}">
+                <div class="col-9">
+                  <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">Agregar</button>
+                </div>
+                <div class="col-3">
+                  <!-- <form th:action="{@/motocicletas/cancelar}" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
+                  </form> -->
+                </div>
+              </div>
+
+
+
+            </div>
+
+            </form>
+          </div>
+        </div>
+
+
       </main>
     </div>
   </div>
@@ -234,7 +292,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
     integrity="sha384-i+dHPTzZw7YVZOx9lbH5l6lP74sLRtMtwN2XjVqjf3uAGAREAF4LMIUDTWEVs4LI"
     crossorigin="anonymous"></script>
-  
+
 </body>
 
 </html>
