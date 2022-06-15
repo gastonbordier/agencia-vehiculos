@@ -132,12 +132,7 @@
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
-      </li>
-    </ul> -->
+
   </nav>
 
   <div class="container-fluid">
@@ -178,21 +173,7 @@
       </nav>
 
       <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-        <!-- <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <span data-feather="calendar"></span>
-              This week
-            </button>
-          </div>
-        </div> -->
-
+  
         <br>
         <br>
 
@@ -221,7 +202,16 @@
                 <td th:text="${obj.cilindrada}"></td>
               </tr>
 
-              <form action="" method="post"><button type="submit">submit</button></form>
+              <form action="" method="post"><button type="submit">Crear</button></form>
+              
+              <!-- Borrar registro n°: <form method="post"><input type="text" th:object="*{nombre}"><button type="submit">Borrar</button></form> -->
+              <br>
+              <br>
+               <form method="post" th:action="@{/motocicletas}">
+                <input type="text" name="nombre" >
+                <button type="submit">hola</button>
+              </form>>
+
 
             </tbody>
           </table>
