@@ -2,6 +2,7 @@ package com.sms.agencia;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,11 +10,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.sms.agencia.dataMotocicletas.Motocicleta;
-import com.sms.agencia.dataMotocicletas.MotocicletaRepository;
-import com.sms.agencia.dataSedanes.Sedan;
-import com.sms.agencia.dataSedanes.SedanRepository;
-import com.sms.agencia.repository.CamionetaRepository;
+import com.sms.agencia.entidades.Motocicleta;
+import com.sms.agencia.entidades.Sedan;
+import com.sms.agencia.repositories.CamionetaRepository;
+import com.sms.agencia.repositories.MotocicletaRepository;
+import com.sms.agencia.repositories.SedanRepository;
 
 @SpringBootApplication
 //@EntityScan("com.sms.agencia.entidades")
@@ -25,6 +26,21 @@ public class AgenciaApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(AgenciaApplication.class, args);
 	}
+	
+	@Autowired
+	private MotocicletaRepository repository;
+	
+	@Bean
+	public void pruebas() {
+//		LOG.info("AAAA");
+		String a = "Size.motocicleta.marca";
+		String[] split = a.split("\\.");
+		for (String string : split) {
+			LOG.info(string);
+		}
+	
+	}
+	
 
 //	@Bean
 	public int hardcode(MotocicletaRepository motocicletaRepository, SedanRepository sedanRepository,

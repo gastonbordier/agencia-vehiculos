@@ -11,120 +11,12 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
     integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-
-    body {
-      font-size: .875rem;
-    }
-
-    .feather {
-      width: 16px;
-      height: 16px;
-      vertical-align: text-bottom;
-    }
-
-    /* Sidebar*/
-
-    .sidebar {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 100;
-      /* Behind the navbar */
-      padding: 48px 0 0;
-      /* Height of navbar */
-      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    }
-
-    @media (max-width: 767.98px) {
-      .sidebar {
-        top: 5rem;
-      }
-    }
-
-    .sidebar-sticky {
-      position: relative;
-      top: 0;
-      height: calc(100vh - 48px);
-      padding-top: .5rem;
-      overflow-x: hidden;
-      overflow-y: auto;
-      /* Scrollable contents if viewport is shorter than content. */
-    }
-
-    .sidebar .nav-link {
-      font-weight: 500;
-      color: #333;
-    }
-
-    .sidebar .nav-link .feather {
-      margin-right: 4px;
-      color: #727272;
-    }
-
-    .sidebar .nav-link.active {
-      color: #007bff;
-    }
-
-    .sidebar .nav-link:hover .feather,
-    .sidebar .nav-link.active .feather {
-      color: inherit;
-    }
-
-    .sidebar-heading {
-      font-size: .75rem;
-      text-transform: uppercase;
-    }
-
-    /*Navbar*/
-    .navbar-brand {
-      padding-top: .75rem;
-      padding-bottom: .75rem;
-      font-size: 1rem;
-      background-color: rgba(0, 0, 0, .25);
-      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-    }
-
-    .navbar .navbar-toggler {
-      top: .25rem;
-      right: 1rem;
-    }
-
-    .navbar .form-control {
-      padding: .75rem 1rem;
-      border-width: 0;
-      border-radius: 0;
-    }
-
-    .form-control-dark {
-      background-color: rgba(255, 255, 255, .1);
-      border-color: rgba(255, 255, 255, .1);
-    }
-
-    .form-control-dark:focus {
-      border-color: transparent;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-    }
-  </style>
 </head>
 
 <body>
-
+  <!-- Titulo -->
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Agencia de autos</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
@@ -172,11 +64,102 @@
       </nav>
 
       <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-
         <br>
-        <br>
-
         <h2>Motocicletas</h2>
+
+        <!-- Fila con displays de encontrar por id, agregar y editar-eliminar   -->
+        <div class="container">
+          <div class="row">
+            <!-- Columna con display de encontrar por id -->
+            <div class="col-3">
+              <form th:action="@{~/motocicletas/agregar}" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Agregar vehiculo</button>
+                <br><br>
+              </form>
+              <form method="post" th:action="@{~/motocicletas/obtener-por-id}" id="obtener-por-id">
+                <input type="text" class="form-control form-control-dark bg-light"
+                  placeholder="Insertar id" name="idBuscar">
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Buscar vehiculo</button>
+              </form>
+            </div>
+
+            <!-- Columna con displays de editar-eliminar -->
+            <div class="col-6" th:if="${panelEditarEliminar}">
+              <form th:action="@{~/motocicletas/editar-eliminar}" th:object="${motocicletaEditable}" id="editar-eliminar" method="post" >
+                <input type="text" readonly name="id" id="id" class="form-control form-control-dark bg-light h-95"
+                  th:field="*{id}">
+                  <input type="text" id="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
+                  th:field="*{marca}">
+                  <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
+                  placeholder="Modelo"  th:field="*{modelo}">
+                <input type="text" input name="color" class="form-control form-control-dark bg-light"
+                  placeholder="Color"  th:field="*{color}">
+                <input type="text" name="stock" class="form-control form-control-dark bg-light"
+                  placeholder="Stock"  th:field="*{stock}">
+                <input type="text" input name="precio" class="form-control form-control-dark bg-light"
+                  placeholder="Precio"  th:field="*{precio}">
+                <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
+                  placeholder="Cilindrada"  th:field="*{cilindrada}" >
+                  
+                <div th:if="${hayErrores}">HAY ERRORESSSSS</div>
+
+
+              </form>
+              <!-- Editar-eliminar -->
+              <div class="row">
+                <div class="col">
+                  <button type="submit" name="accion" value="editar" form="editar-eliminar"
+                    class="btn btn-sm btn-outline-secondary text-dark w-100">Editar</button>
+                </div>
+                <div class="col">
+
+                  <button type="submit" name="accion" value="eliminar" form="editar-eliminar"
+                    class="btn btn-sm btn-outline-secondary text-dark w-100">Eliminar</button>
+                </div>
+
+                <div class="col">
+                  <form method="post" th:action="@{~/motocicletas/cancelar}">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Agregar -->
+            <!-- Columna con displays de agregar -->
+            <div class="col-6" th:if="${panelAgregar}">
+              <form th:action="@{~/motocicletas/chequear-agregar}" id="agregar"
+                method="post">
+
+                <input type="text" name="marca" class="form-control form-control-dark bg-light" placeholder="Marca">
+                <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
+                  placeholder="Modelo" >
+                <input type="text" input name="color" class="form-control form-control-dark bg-light"
+                  placeholder="Color" >
+                <input type="text" input name="stock" class="form-control form-control-dark bg-light"
+                  placeholder="Stock" >
+                <input type="text" input name="precio" class="form-control form-control-dark bg-light"
+                  placeholder="Precio" >
+                <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
+                  placeholder="Cilindrada">
+              </form>
+              <!-- Agregar -->
+              <div class="row">
+                <div class="col">
+                  <button type="submit" name="accion" value="agregar" form="agregar"
+                    class="btn btn-sm btn-outline-secondary text-dark w-100">Agregar</button>
+                </div>
+                <div class="col">
+                  <form method="post" th:action="@{~/motocicletas/cancelar}">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- Tabla -->
         <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>
@@ -200,78 +183,12 @@
                 <td th:text="${obj.precio}"></td>
                 <td th:text="${obj.cilindrada}"></td>
               </tr>
-
-              <form action="" method="post"><button type="submit">Crear</button></form>
-
-              <!-- Borrar registro n°: <form method="post"><input type="text" th:object="*{nombre}"><button type="submit">Borrar</button></form> -->
               <br>
               <br>
-              <!-- <form method="post" th:action="@{/motocicletas}">
-                <input type="text" name="nombre">
-                <button type="submit">hola</button>
-              </form>> -->
-
-
             </tbody>
           </table>
         </div>
 
-        <div class="container">
-          <div class="row">
-            <div class="col-3">
-              <form method="post" th:action="@{/motocicletas/editar-eliminar}">
-                <input type="text" input name="id" class="form-control form-control-dark bg-light"
-                  placeholder="Insertar id">
-                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Buscar vehiculo</button>
-              </form>
-              <form th:action="@{/motocicletas/agregar}" method="post">
-                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Agregar vehiculo</button>
-              </form>
-            </div>
-
-
-            <div class="col-6" th:if="${editarMotocicleta || agregarMotocicleta}">
-              <input type="text" input name="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
-                th:value="${marca}">
-              <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
-                placeholder="Modelo" th:value="${modelo}">
-              <input type="text" input name="color" class="form-control form-control-dark bg-light" placeholder="Color"
-                th:value="${color}">
-              <input type="text" input name="stock" class="form-control form-control-dark bg-light" placeholder="Stock"
-                th:value="${stock}">
-              <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                placeholder="Precio" th:value="${precio}">
-              <div class="row" th:if="${editarMotocicleta}">
-                <div class="col">
-                  <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">Editar</button>
-                </div>
-                <div class="col">
-                  <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">Eliminar</button>
-                </div>
-                <div class="col">
-                  <form th:action="{@motocicletas/editar-eliminar/cancelar}" method="post">
-                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
-                  </form>
-                </div>
-              </div>
-              <div class="row" th:if="${agregarMotocicleta}">
-                <div class="col-9">
-                  <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">Agregar</button>
-                </div>
-                <div class="col-3">
-                  <!-- <form th:action="{@/motocicletas/cancelar}" method="post">
-                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
-                  </form> -->
-                </div>
-              </div>
-
-
-
-            </div>
-
-            </form>
-          </div>
-        </div>
 
 
       </main>

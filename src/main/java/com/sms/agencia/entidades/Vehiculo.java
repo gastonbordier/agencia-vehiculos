@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public class Vehiculo {
@@ -12,12 +15,16 @@ public class Vehiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected int id;
+	@Size(min = 3, message = "La marca debe tener al menos 3 caracteres")
 	protected String marca;
 	@Column(unique = true)
 	protected String modelo;
 	protected String color;
+	@NotNull(message = "Debe ingresar un valor")
 	protected int stock;
 	@Column(columnDefinition = "decimal(10,2)")
+	@NotNull(message = "Debe ingresar un valor")
+	@PositiveOrZero
 	protected float precio;
 
 	public Vehiculo() {
