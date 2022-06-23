@@ -15,16 +15,22 @@ public class Vehiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected int id;
+
 	@Size(min = 3, message = "La marca debe tener al menos 3 caracteres")
 	protected String marca;
+	
 	@Column(unique = true)
+	@Size(min = 3, message = "El modelo debe tener al menos 3 caracteres")
 	protected String modelo;
+	
+	@Size(min = 3, message = "El color debe tener al menos 3 caracteres")
 	protected String color;
-	@NotNull(message = "Debe ingresar un valor")
+	
+	@PositiveOrZero(message = "El stock no puede ser un numero negativo")
 	protected int stock;
+
 	@Column(columnDefinition = "decimal(10,2)")
-	@NotNull(message = "Debe ingresar un valor")
-	@PositiveOrZero
+	@PositiveOrZero(message = "El precio no puede ser un numero negativo")
 	protected float precio;
 
 	public Vehiculo() {

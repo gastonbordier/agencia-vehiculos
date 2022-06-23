@@ -17,7 +17,7 @@ import com.sms.agencia.repositories.MotocicletaRepository;
 
 @RestController
 @RequestMapping("/motocicletas/servicioRest")
-public class RestPruebaController {
+public class RestControllerMotocicleta {
 
 	@Autowired
 	private MotocicletaRepository repository;

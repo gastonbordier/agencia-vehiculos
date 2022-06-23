@@ -59,7 +59,7 @@ public class MotoController {
 
 		if (idBuscar.length() > 0) {
 
-			Motocicleta motocicletaEditable = motocicletaService.findById(Integer.parseInt(idBuscar));
+			Motocicleta motocicletaEditable = motocicletaService.encontrarPorId(Integer.parseInt(idBuscar));
 			LOG.info(motocicletaEditable.toString());
 			panelEditarEliminarActivo = true;
 			panelAgregarActivo = false;
@@ -71,60 +71,32 @@ public class MotoController {
 		return "motocicletas.html";
 	}
 
-	@ExceptionHandler(NumberFormatException.class)
-	public void excepcionNumero() {
-
-	}
-
 	@PostMapping(path = "/editar-eliminar", params = "accion=editar")
 	public String editar(@Valid @ModelAttribute Motocicleta motocicletaEditable, BindingResult result, Model model) {
+
 		if (result.hasErrors()) {
+
 			model.addAttribute("hayErrores", true);
+			model.addAttribute("listaMensajesError", obtenerMensajesError(result));
 
-			List<ObjectError> list = new ArrayList<>();
-			result.getAllErrors().forEach(obj -> list.add(obj));
-
-//			for(int i = 0; i < list.size(); i++) {
-//				if( list.get(i).getCode().equals("typeMismatch")) {
-//					model.addAttribute("error"+i, );
-//				}else {
-//					
-//					model.addAttribute("error"+i, list.get(i).getDefaultMessage() );
-//				}
-//			}
-//			
-
-			list.forEach(error -> {
-//				LOG.info(error.getDefaultMessage());
-				
-				LOG.info(error.getCodes()[0]);
-//				LOG.info(error.getCodes()[0].split(".")[2]);
-//				LOG.info(String.valueOf(error.getArguments().length));
-//				for (String code : error.getCodes()) {
-//					LOG.info(code.split(".")[2]);
-//
-//				}
-
-			});
-			model.addAttribute("motocicletaEditable", motocicletaEditable);
-			actualizarModelo(model);
-
-			return "motocicletas.html";
 		} else {
-			motocicletaService.save(motocicletaEditable);
-			panelAgregarActivo = false;
+			motocicletaService.grabar(motocicletaEditable);
 			panelEditarEliminarActivo = false;
-			actualizarModelo(model);
-			return "motocicletas.html";
 		}
+
+		model.addAttribute("motocicletaEditable", motocicletaEditable);
+		actualizarModelo(model);
+		return "motocicletas.html";
 	}
 
 	@PostMapping(path = "/editar-eliminar", params = "accion=eliminar")
 	public String eliminar(@ModelAttribute(name = "id") String id, Model model) {
-		motocicletaService.deleteById(Integer.parseInt(id));
+		motocicletaService.eliminarPorId(Integer.parseInt(id));
 		panelAgregarActivo = false;
 		panelEditarEliminarActivo = false;
 
+		model.addAttribute("hayOperacion", true);
+		model.addAttribute("mensajeOperacion", "Motocicleta eliminada");
 		actualizarModelo(model);
 		return "motocicletas.html";
 	}
@@ -144,30 +116,25 @@ public class MotoController {
 	}
 
 	@PostMapping("/chequear-agregar")
-	public String chequearAgregarMoto(@ModelAttribute Motocicleta motocicletaNueva, BindingResult result, Model model) {
+	public String chequearAgregarMoto(@Valid @ModelAttribute Motocicleta motocicletaNueva, BindingResult result,
+			Model model) {
 
-		if (result.getAllErrors().size() == 0) {
-			motocicletaService.save(motocicletaNueva);
-			panelAgregarActivo = false;
-			panelEditarEliminarActivo = false;
+		if (result.hasErrors()) {
+			model.addAttribute("hayErrores", true);
+			model.addAttribute("listaMensajesError", obtenerMensajesError(result));.
 
 		} else {
-			for (ObjectError error : result.getAllErrors()) {
-				LOG.info("ITEM " + error.getCodes()[2]);
-				model.addAttribute("motocicletaNueva", motocicletaNueva);
-
-			}
+			motocicletaService.grabar(motocicletaNueva);
+			panelAgregarActivo = false;
+			panelEditarEliminarActivo = false;
+			model.addAttribute("hayOperacion", true);
+			model.addAttribute("mensajeOperacion", "Motocicleta eliminada");
 
 		}
 
 		actualizarModelo(model);
 		return "motocicletas.html";
 	}
-//
-//	@ExceptionHandler(value = BindException.class)
-//	public String manejarExcepciones(Model model) {
-//		return "motocicletas.html";
-//	}
 
 	@PostMapping("/cancelar")
 	public String cancelar(Model model) {
@@ -180,11 +147,30 @@ public class MotoController {
 
 	private void actualizarModelo(Model model) {
 //		actualiza lista 
-		List<Motocicleta> lista = motocicletaService.findAll();
+		List<Motocicleta> lista = motocicletaService.listar();
 		model.addAttribute("lista", lista);
 //		actualiza modo de display
 		model.addAttribute("panelEditarEliminar", panelEditarEliminarActivo);
 		model.addAttribute("panelAgregar", panelAgregarActivo);
+	}
+
+	private List<String> obtenerMensajesError(BindingResult result) {
+		List<ObjectError> listaErrores = new ArrayList<>();
+		List<String> listaMensajes = new ArrayList<>();
+
+		result.getAllErrors().forEach(error -> listaErrores.add(error));
+		listaErrores.forEach(error -> {
+
+			if (error.getCode().equals("typeMismatch")) {
+				String campo = error.getCodes()[0].split("\\.")[2];
+				listaMensajes.add("El ingreso en " + campo + " debe ser un numero.");
+			} else {
+				listaMensajes.add(error.getDefaultMessage());
+			}
+
+		});
+
+		return listaMensajes;
 	}
 
 }

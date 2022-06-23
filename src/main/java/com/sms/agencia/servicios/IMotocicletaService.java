@@ -5,9 +5,9 @@ import java.util.List;
 import com.sms.agencia.entidades.Motocicleta;
 
 public interface IMotocicletaService {
-	void save(Motocicleta motocicleta);
-	List<Motocicleta> findAll();
-	Motocicleta findById(int id);
-	void deleteById(int id);
+	void grabar(Motocicleta motocicleta);
+	List<Motocicleta> listar();
+	Motocicleta encontrarPorId(int id);
+	void eliminarPorId(int id);
 
 }

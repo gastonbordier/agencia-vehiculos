@@ -15,24 +15,24 @@ public class MotocicletaServiceImpl implements IMotocicletaService {
 	private MotocicletaRepository repository;
 	
 	@Override
-	public List<Motocicleta> findAll() {
+	public List<Motocicleta> listar() {
 		return repository.findAll();
 	}
 	
 	@Override
-	public void save(Motocicleta motocicleta) {
+	public void grabar(Motocicleta motocicleta) {
 		repository.save(motocicleta);
 		
 	}
 
 
 	@Override
-	public Motocicleta findById(int id) {
+	public Motocicleta encontrarPorId(int id) {
 		return repository.findById(id).get();
 	}
 
 	@Override
-	public void deleteById(int id) {
+	public void eliminarPorId(int id) {
 		repository.deleteById(id);
 	}
 

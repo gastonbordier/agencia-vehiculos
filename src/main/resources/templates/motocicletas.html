@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
     integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 
@@ -77,30 +78,31 @@
                 <br><br>
               </form>
               <form method="post" th:action="@{~/motocicletas/obtener-por-id}" id="obtener-por-id">
-                <input type="text" class="form-control form-control-dark bg-light"
-                  placeholder="Insertar id" name="idBuscar">
+                <input type="text" class="form-control form-control-dark bg-light" placeholder="Insertar id"
+                  name="idBuscar">
                 <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Buscar vehiculo</button>
               </form>
             </div>
 
             <!-- Columna con displays de editar-eliminar -->
             <div class="col-6" th:if="${panelEditarEliminar}">
-              <form th:action="@{~/motocicletas/editar-eliminar}" th:object="${motocicletaEditable}" id="editar-eliminar" method="post" >
+              <form th:action="@{~/motocicletas/editar-eliminar}" th:object="${motocicletaEditable}"
+                id="editar-eliminar" method="post">
                 <input type="text" readonly name="id" id="id" class="form-control form-control-dark bg-light h-95"
                   th:field="*{id}">
-                  <input type="text" id="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
+                <input type="text" id="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
                   th:field="*{marca}">
-                  <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
-                  placeholder="Modelo"  th:field="*{modelo}">
+                <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
+                  placeholder="Modelo" th:field="*{modelo}">
                 <input type="text" input name="color" class="form-control form-control-dark bg-light"
-                  placeholder="Color"  th:field="*{color}">
-                <input type="text" name="stock" class="form-control form-control-dark bg-light"
-                  placeholder="Stock"  th:field="*{stock}">
+                  placeholder="Color" th:field="*{color}">
+                <input type="text" name="stock" class="form-control form-control-dark bg-light" placeholder="Stock"
+                  th:field="*{stock}">
                 <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                  placeholder="Precio"  th:field="*{precio}">
+                  placeholder="Precio" th:field="*{precio}">
                 <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
-                  placeholder="Cilindrada"  th:field="*{cilindrada}" >
-                  
+                  placeholder="Cilindrada" th:field="*{cilindrada}">
+
                 <div th:if="${hayErrores}">HAY ERRORESSSSS</div>
 
 
@@ -128,18 +130,17 @@
             <!-- Agregar -->
             <!-- Columna con displays de agregar -->
             <div class="col-6" th:if="${panelAgregar}">
-              <form th:action="@{~/motocicletas/chequear-agregar}" id="agregar"
-                method="post">
+              <form th:action="@{~/motocicletas/chequear-agregar}" id="agregar" method="post">
 
                 <input type="text" name="marca" class="form-control form-control-dark bg-light" placeholder="Marca">
                 <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
-                  placeholder="Modelo" >
+                  placeholder="Modelo">
                 <input type="text" input name="color" class="form-control form-control-dark bg-light"
-                  placeholder="Color" >
+                  placeholder="Color">
                 <input type="text" input name="stock" class="form-control form-control-dark bg-light"
-                  placeholder="Stock" >
+                  placeholder="Stock">
                 <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                  placeholder="Precio" >
+                  placeholder="Precio">
                 <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
                   placeholder="Cilindrada">
               </form>
@@ -191,8 +192,20 @@
 
 
 
+
       </main>
     </div>
+  </div>
+
+  <div class="alert alert-warning alert-dismissible fade show fixed-bottom" role="alert" th:if="${hayErrores}">
+    <div th:each="mensaje : ${listaMensajesError}">
+      <strong th:text="${mensaje}"></strong>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div class="alert alert-info alert-dismissible fade show fixed-bottom" role="alert" th:if="${hayOperacion}">
+    <strong th:text="${mensajeOperacion}"></strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
 
@@ -209,6 +222,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
     integrity="sha384-i+dHPTzZw7YVZOx9lbH5l6lP74sLRtMtwN2XjVqjf3uAGAREAF4LMIUDTWEVs4LI"
     crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

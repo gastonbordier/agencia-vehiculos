@@ -30,16 +30,10 @@ public class AgenciaApplication implements CommandLineRunner {
 	@Autowired
 	private MotocicletaRepository repository;
 	
-	@Bean
-	public void pruebas() {
-//		LOG.info("AAAA");
-		String a = "Size.motocicleta.marca";
-		String[] split = a.split("\\.");
-		for (String string : split) {
-			LOG.info(string);
-		}
-	
-	}
+//	@Bean
+//	public void pruebas() {
+//	
+//	}
 	
 
 //	@Bean
