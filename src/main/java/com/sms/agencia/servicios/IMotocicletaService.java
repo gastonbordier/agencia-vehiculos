@@ -9,5 +9,6 @@ public interface IMotocicletaService {
 	List<Motocicleta> listar();
 	Motocicleta encontrarPorId(int id);
 	void eliminarPorId(int id);
+	boolean existeId(int id);
 
 }

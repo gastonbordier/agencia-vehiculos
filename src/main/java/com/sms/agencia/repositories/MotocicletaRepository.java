@@ -11,4 +11,5 @@ import com.sms.agencia.entidades.Motocicleta;
 @Repository
 public interface MotocicletaRepository extends JpaRepository<Motocicleta, Integer>{
 	
+	
 }

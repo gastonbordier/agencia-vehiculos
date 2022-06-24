@@ -36,6 +36,11 @@ public class MotocicletaServiceImpl implements IMotocicletaService {
 		repository.deleteById(id);
 	}
 
+	@Override
+	public boolean existeId(int id) {
+		return repository.existsById(id);
+	}
+
 
 	
 

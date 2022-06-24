@@ -56,28 +56,42 @@ public class MotoController {
 	@PostMapping("/obtener-por-id")
 	public String obtenerPorId(@ModelAttribute(name = "idBuscar") String idBuscar, Model model) {
 		LOG.info("id = " + idBuscar);
+		LOG.info(String.valueOf(idBuscar));
+		int valorId = -1;
 
-		if (idBuscar.length() > 0) {
+		try {
+			valorId = Integer.parseInt(idBuscar);
 
-			Motocicleta motocicletaEditable = motocicletaService.encontrarPorId(Integer.parseInt(idBuscar));
-			LOG.info(motocicletaEditable.toString());
-			panelEditarEliminarActivo = true;
-			panelAgregarActivo = false;
+			if (motocicletaService.existeId(valorId)) {
 
-			model.addAttribute("motocicletaEditable", motocicletaEditable);
+				Motocicleta motocicletaEditable = motocicletaService.encontrarPorId(valorId);
+				LOG.info(motocicletaEditable.toString());
+				panelEditarEliminarActivo = true;
+				panelAgregarActivo = false;
+				model.addAttribute("idBuscar", idBuscar);
+				model.addAttribute("motocicletaEditable", motocicletaEditable);
+			} else {
+				model.addAttribute("hayErrores", true);
+				model.addAttribute("listaMensajesError", "El id no existe.");
+
+			}
+		} catch (NumberFormatException e) {
+			model.addAttribute("hayErrores", true);
+			model.addAttribute("listaMensajesError", "El id debe ser un numero.");
 
 		}
+
 		actualizarModelo(model);
 		return "motocicletas.html";
 	}
 
 	@PostMapping(path = "/editar-eliminar", params = "accion=editar")
 	public String editar(@Valid @ModelAttribute Motocicleta motocicletaEditable, BindingResult result, Model model) {
-
 		if (result.hasErrors()) {
 
 			model.addAttribute("hayErrores", true);
 			model.addAttribute("listaMensajesError", obtenerMensajesError(result));
+			motocicletaEditable = motocicletaService.encontrarPorId(motocicletaEditable.getId());
 
 		} else {
 			motocicletaService.grabar(motocicletaEditable);
@@ -90,7 +104,7 @@ public class MotoController {
 	}
 
 	@PostMapping(path = "/editar-eliminar", params = "accion=eliminar")
-	public String eliminar(@ModelAttribute(name = "id") String id, Model model) {
+	public String eliminarMotocicleta(@ModelAttribute(name = "id") String id, Model model) {
 		motocicletaService.eliminarPorId(Integer.parseInt(id));
 		panelAgregarActivo = false;
 		panelEditarEliminarActivo = false;
@@ -101,34 +115,27 @@ public class MotoController {
 		return "motocicletas.html";
 	}
 
-	@PostMapping("/agregar")
-	public String agregarMoto(Model model) {
-		try {
-
-			panelAgregarActivo = true;
-			panelEditarEliminarActivo = false;
-
-			actualizarModelo(model);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+	@PostMapping("/activar-panel-agregar")
+	public String activarPanelAgregar(Model model) {
+		panelAgregarActivo = true;
+		panelEditarEliminarActivo = false;
+		actualizarModelo(model);
 		return "motocicletas.html";
 	}
 
-	@PostMapping("/chequear-agregar")
-	public String chequearAgregarMoto(@Valid @ModelAttribute Motocicleta motocicletaNueva, BindingResult result,
-			Model model) {
+	@PostMapping("/agregar")
+	public String agregar(@Valid @ModelAttribute Motocicleta motocicletaNueva, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("hayErrores", true);
-			model.addAttribute("listaMensajesError", obtenerMensajesError(result));.
+			model.addAttribute("listaMensajesError", obtenerMensajesError(result));
 
 		} else {
 			motocicletaService.grabar(motocicletaNueva);
 			panelAgregarActivo = false;
 			panelEditarEliminarActivo = false;
 			model.addAttribute("hayOperacion", true);
-			model.addAttribute("mensajeOperacion", "Motocicleta eliminada");
+			model.addAttribute("mensajeOperacion", "Motocicleta agregada");
 
 		}
 

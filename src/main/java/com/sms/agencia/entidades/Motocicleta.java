@@ -1,11 +1,12 @@
 package com.sms.agencia.entidades;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Motocicleta extends Vehiculo {
-	@PositiveOrZero(message = "La cilindrada no puede ser un numero negativo")
+	@Positive(message = "El precio no puede ser un numero negativo ni cero")
 	private int cilindrada;
 
 	public Motocicleta() {
