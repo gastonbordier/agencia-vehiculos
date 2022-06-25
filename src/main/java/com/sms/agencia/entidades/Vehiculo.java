@@ -15,7 +15,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Vehiculo {
 
 	@Id

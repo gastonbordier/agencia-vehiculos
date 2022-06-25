@@ -1,4 +1,4 @@
-package com.sms.agencia.servicios;
+package com.sms.agencia.serviciosRest;
 
 import java.util.List;
 

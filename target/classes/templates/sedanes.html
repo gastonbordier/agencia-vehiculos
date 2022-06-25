@@ -1,19 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Gaston Bordier">
-  <title>Agencia de Autos - Motocicletas</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="Gaston Bordier" />
+  <title>Agencia de Autos - Sedanes</title>
 
-  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/">
+  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-  integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../style.css">
-  
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
@@ -24,7 +23,6 @@
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
   </nav>
 
   <div class="container-fluid">
@@ -40,13 +38,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/motocicletas">
+              <a class="nav-link" href="/motocicletas">
                 <span data-feather="motos"></span>
                 Motocicletas
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/sedanes">
+              <a class="nav-link active" href="/sedanes">
                 <span data-feather="sedanes"></span>
                 Sedanes
               </a>
@@ -58,64 +56,69 @@
               </a>
             </li>
           </ul>
-
-
         </div>
       </nav>
 
       <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-        <br>
-        <h2>Motocicletas</h2>
+        <br />
+        <h2>Sedanes</h2>
 
         <!-- Fila con displays de encontrar por id, agregar y editar-eliminar   -->
         <div class="container">
           <div class="row">
             <!-- Columna con display de encontrar por id -->
             <div class="col-3">
-              <form th:action="@{~/motocicletas/activar-panel-agregar}" method="post">
-                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Agregar motocicleta</button>
-                <br><br>
+              <form th:action="@{~/sedanes/activar-panel-agregar}" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">
+                  Agregar sedan
+                </button>
+                <br /><br />
               </form>
-              <form method="post" th:action="@{~/motocicletas/obtener-por-id}" id="obtener-por-id">
+              <form method="post" th:action="@{~/sedanes/obtener-por-id}" id="obtener-por-id">
                 <input type="text" class="form-control form-control-dark bg-light" placeholder="Insertar id"
-                  name="idBuscar">
-                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Buscar motocicleta</button>
+                  name="idBuscar" />
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">
+                  Buscar sedan
+                </button>
               </form>
             </div>
 
             <!-- Columna con displays de editar-eliminar -->
             <div class="col-6" th:if="${panelEditarEliminar}">
-              <form th:action="@{~/motocicletas/editar-eliminar}" th:object="${motocicletaEditable}"
-                id="editar-eliminar" method="post">
+              <form th:action="@{~/sedanes/editar-eliminar}" th:object="${sedanEditable}" id="editar-eliminar"
+                method="post">
                 <input type="text" readonly name="id" id="id" class="form-control form-control-dark bg-light h-95"
-                  th:field="*{id}">
+                  th:field="*{id}" />
                 <input type="text" id="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
-                  th:field="*{marca}">
+                  th:field="*{marca}" />
                 <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
-                  placeholder="Modelo" th:field="*{modelo}">
+                  placeholder="Modelo" th:field="*{modelo}" />
                 <input type="text" input name="color" class="form-control form-control-dark bg-light"
-                  placeholder="Color" th:field="*{color}">
+                  placeholder="Color" th:field="*{color}" />
                 <input type="text" name="stock" class="form-control form-control-dark bg-light" placeholder="Stock"
-                  th:field="*{stock}">
+                  th:field="*{stock}" />
                 <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                  placeholder="Precio" th:field="*{precio}">
-                <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
-                  placeholder="Cilindrada" th:field="*{cilindrada}">
+                  placeholder="Precio" th:field="*{precio}" />
               </form>
               <div class="row">
                 <div class="col">
                   <button type="submit" name="accion" value="editar" form="editar-eliminar"
-                    class="btn btn-sm btn-outline-secondary text-dark w-100">Editar</button>
+                    class="btn btn-sm btn-outline-secondary text-dark w-100">
+                    Editar
+                  </button>
                 </div>
                 <div class="col">
-
                   <button type="submit" name="accion" value="eliminar" form="editar-eliminar"
-                    class="btn btn-sm btn-outline-secondary text-dark w-100">Eliminar</button>
+                    class="btn btn-sm btn-outline-secondary text-dark w-100">
+                    Eliminar
+                  </button>
                 </div>
 
                 <div class="col">
-                  <form method="post" th:action="@{~/motocicletas/cancelar}">
-                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
+                  <form method="post" th:action="@{~/sedanes/cancelar}">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">
+                      Cancelar
+                    </button>
                   </form>
                 </div>
               </div>
@@ -124,33 +127,48 @@
             <!-- Agregar -->
             <!-- Columna con displays de agregar -->
             <div class="col-6" th:if="${panelAgregar}">
-              <form th:action="@{~/motocicletas/agregar}" id="agregar" method="post">
-
-                <input type="text" name="marca" class="form-control form-control-dark bg-light" placeholder="Marca">
+              <form th:action="@{~/sedanes/agregar}" id="agregar" method="post">
+                <input type="text" name="marca" class="form-control form-control-dark bg-light" placeholder="Marca" />
                 <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
-                  placeholder="Modelo">
+                  placeholder="Modelo" />
                 <input type="text" input name="color" class="form-control form-control-dark bg-light"
-                  placeholder="Color">
+                  placeholder="Color" />
                 <input type="text" input name="stock" class="form-control form-control-dark bg-light"
-                  placeholder="Stock">
+                  placeholder="Stock" />
                 <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                  placeholder="Precio">
-                <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
-                  placeholder="Cilindrada">
+                  placeholder="Precio" />
+                <input type="text" input name="cantidadPuertas" class="form-control form-control-dark bg-light"
+                  placeholder="Cantidad de puertas" />
+                <input type="text" input name="cantidadRuedas" class="form-control form-control-dark bg-light"
+                  placeholder="Cantidad de ruedas" />
+                <input type="text" input name="cantidadOcupantes" class="form-control form-control-dark bg-light"
+                  placeholder="Cantidad de ocupantes" />
+                <input type="text" input name="tipoCombustible" class="form-control form-control-dark bg-light"
+                  placeholder="Tipo de combustible" />
+                <select class="form-select form-control-black bg-light" name="esDescapotable">
+                  <option disabled selected>Es descapotable?</option>
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+
+
               </form>
               <div class="row">
                 <div class="col">
                   <button type="submit" name="accion" value="agregar" form="agregar"
-                    class="btn btn-sm btn-outline-secondary text-dark w-100">Agregar</button>
+                    class="btn btn-sm btn-outline-secondary text-dark w-100">
+                    Agregar
+                  </button>
                 </div>
                 <div class="col">
-                  <form method="post" th:action="@{~/motocicletas/cancelar}">
-                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark  w-100">Cancelar</button>
+                  <form method="post" th:action="@{~/sedanes/cancelar}">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">
+                      Cancelar
+                    </button>
                   </form>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
         <!-- Tabla -->
@@ -164,7 +182,6 @@
                 <th>Color</th>
                 <th>Stock</th>
                 <th>Precio</th>
-                <th>Cilindrada</th>
               </tr>
             </thead>
             <tbody>
@@ -175,17 +192,12 @@
                 <td th:text="${obj.color}"></td>
                 <td th:text="${obj.stock}"></td>
                 <td th:text="${obj.precio}"></td>
-                <td th:text="${obj.cilindrada}"></td>
               </tr>
-              <br>
-              <br>
+              <br />
+              <br />
             </tbody>
           </table>
         </div>
-
-
-
-
       </main>
     </div>
   </div>
@@ -215,7 +227,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
     integrity="sha384-i+dHPTzZw7YVZOx9lbH5l6lP74sLRtMtwN2XjVqjf3uAGAREAF4LMIUDTWEVs4LI"
     crossorigin="anonymous"></script>
-
 </body>
 
 </html>

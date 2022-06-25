@@ -5,8 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Hugo 0.72.0">
+  <meta name="author" content="Gaston Bordier">
   <title>Agencia de Autos - Motocicletas</title>
 
   <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/">
@@ -16,7 +15,6 @@
   <link rel="stylesheet" href="../style.css">
   
 </head>
-
 
 <body>
   <!-- Titulo -->
@@ -36,13 +34,13 @@
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">
+              <a class="nav-link" aria-current="page" href="/">
                 <span data-feather="home"></span>
                 Home
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/motocicletas">
+              <a class="nav-link active" href="/motocicletas">
                 <span data-feather="motos"></span>
                 Motocicletas
               </a>
@@ -75,13 +73,13 @@
             <!-- Columna con display de encontrar por id -->
             <div class="col-3">
               <form th:action="@{~/motocicletas/activar-panel-agregar}" method="post">
-                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Agregar vehiculo</button>
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Agregar motocicleta</button>
                 <br><br>
               </form>
               <form method="post" th:action="@{~/motocicletas/obtener-por-id}" id="obtener-por-id">
                 <input type="text" class="form-control form-control-dark bg-light" placeholder="Insertar id"
                   name="idBuscar">
-                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Buscar vehiculo</button>
+                <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Buscar motocicleta</button>
               </form>
             </div>
 
