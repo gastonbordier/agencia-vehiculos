@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
     integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="/../style.css" />
+
+
 </head>
 
 <body>
@@ -61,13 +63,18 @@
 
       <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <br />
-        <h2>Sedanes</h2>
+
+        <div class="row">
+          <div class="col-sm-4 pb-3">
+            <div class="h2">Sedanes</div>
+          </div>
+        </div>
 
         <!-- Fila con displays de encontrar por id, agregar y editar-eliminar   -->
         <div class="container">
           <div class="row">
             <!-- Columna con display de encontrar por id -->
-            <div class="col-3">
+            <div class="col-sm-4">
               <form th:action="@{~/sedanes/activar-panel-agregar}" method="post">
                 <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">
                   Agregar sedan
@@ -84,21 +91,45 @@
             </div>
 
             <!-- Columna con displays de editar-eliminar -->
-            <div class="col-6" th:if="${panelEditarEliminar}">
+            <div class="col-lg p-4" th:if="${panelEditarEliminar}">
+              <div class="h5">Editar Sedan:</div>
               <form th:action="@{~/sedanes/editar-eliminar}" th:object="${sedanEditable}" id="editar-eliminar"
                 method="post">
-                <input type="text" readonly name="id" id="id" class="form-control form-control-dark bg-light h-95"
+                <label for="id">Id:</label>
+                <input readonly type="text" name="id" class="form-control form-control-dark bg-light"
                   th:field="*{id}" />
-                <input type="text" id="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
-                  th:field="*{marca}" />
+                <label for="marca">Marca:</label>
+                <input type="text" name="marca" class="form-control form-control-dark bg-light" th:field="*{marca}" />
+                <label for="modelo">Modelo:</label>
                 <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
-                  placeholder="Modelo" th:field="*{modelo}" />
+                  th:field="*{modelo}" />
+                <label for="color">Color:</label>
                 <input type="text" input name="color" class="form-control form-control-dark bg-light"
-                  placeholder="Color" th:field="*{color}" />
-                <input type="text" name="stock" class="form-control form-control-dark bg-light" placeholder="Stock"
+                  th:field="*{color}" />
+                <label for="stock">Stock:</label>
+                <input type="text" input name="stock" class="form-control form-control-dark bg-light"
                   th:field="*{stock}" />
+                <label for="precio">Precio:</label>
                 <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                  placeholder="Precio" th:field="*{precio}" />
+                  th:field="*{precio}" />
+                <label for="cantidadPuertas">Cantidad de puertas:</label>
+                <input type="text" input name="cantidadPuertas" class="form-control form-control-dark bg-light"
+                  th:field="*{cantidadPuertas}" />
+                <label for="cantidadRuedas">Cantidad de ruedas:</label>
+                <input type="text" input name="cantidadRuedas" class="form-control form-control-dark bg-light"
+                  th:field="*{cantidadRuedas}" />
+                <label for="capacidadOcupantes">Cantidad de ocupantes:</label>
+                <input type="text" input name="capacidadOcupantes" class="form-control form-control-dark bg-light"
+                  th:field="*{capacidadOcupantes}" />
+                <label for="tipoCombustible">Tipo de combustible:</label>
+                <input type="text" input name="tipoCombustible" class="form-control form-control-dark bg-light"
+                  th:field="*{tipoCombustible}" />
+                <label for="esDescapotable">Es descapotable?</label>
+                <select multiple size="2" class="form-select form-control-dark bg-light" name="esDescapotable"
+                  th:field="*{esDescapotable}">
+                  <option value="si">Si</option>
+                  <option value="no">No</option>
+                </select>
               </form>
               <div class="row">
                 <div class="col">
@@ -124,37 +155,33 @@
               </div>
             </div>
 
-            <!-- Agregar -->
             <!-- Columna con displays de agregar -->
-            <div class="col-6" th:if="${panelAgregar}">
+            <div class="col-lg p-4" th:if="${panelAgregar}">
+              <div class="h5">Agregar Sedan:</div>
               <form th:action="@{~/sedanes/agregar}" id="agregar" method="post">
                 <label for="marca">Marca:</label>
                 <input type="text" name="marca" class="form-control form-control-dark bg-light" />
                 <label for="modelo">Modelo:</label>
-                <input type="text" input name="modelo" class="form-control form-control-dark bg-light"/>
+                <input type="text" input name="modelo" class="form-control form-control-dark bg-light" />
                 <label for="color">Color:</label>
-                <input type="text" input name="color" class="form-control form-control-dark bg-light"/>
+                <input type="text" input name="color" class="form-control form-control-dark bg-light" />
                 <label for="stock">Stock:</label>
-                <input type="text" input name="stock" class="form-control form-control-dark bg-light"/>
+                <input type="text" input name="stock" class="form-control form-control-dark bg-light" />
                 <label for="precio">Precio:</label>
-                <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                  placeholder="Precio" /> 
+                <input type="text" input name="precio" class="form-control form-control-dark bg-light" />
                 <label for="cantidadPuertas">Cantidad de puertas:</label>
-                <input type="text" input name="cantidadPuertas" class="form-control form-control-dark bg-light"
-                  placeholder="Cantidad de puertas" />
+                <input type="text" input name="cantidadPuertas" class="form-control form-control-dark bg-light" />
                 <label for="cantidadRuedas">Cantidad de ruedas:</label>
-                <input type="text" input name="cantidadRuedas" class="form-control form-control-dark bg-light"
-                  placeholder="Cantidad de ruedas" />
-                <label for="cantidadOcupantes">Cantidad de ocupantes:</label>
-                <input type="text" input name="cantidadOcupantes" class="form-control form-control-dark bg-light"
-                  placeholder="Cantidad de ocupantes" />
+                <input type="text" input name="cantidadRuedas" class="form-control form-control-dark bg-light" />
+                <label for="capacidadOcupantes">Cantidad de ocupantes:</label>
+                <input type="text" input name="capacidadOcupantes" class="form-control form-control-dark bg-light"
+                  th:value="${sedanNuevo.capacidadOcupantes}" />
                 <label for="tipoCombustible">Tipo de combustible:</label>
-                <input type="text" input name="tipoCombustible" class="form-control form-control-dark bg-light"
-                  placeholder="Tipo de combustible" />
+                <input type="text" input name="tipoCombustible" class="form-control form-control-dark bg-light" />
                 <label for="esDescapotable">Es descapotable?</label>
-                <select class="form-select form-control-dark bg-light text-black-50" name="esDescapotable">
-                  <option value="true">Si</option>
-                  <option value="false" selected>No</option>
+                <select class="form-select form-control-dark bg-light" name="esDescapotable">
+                  <option value="si">Si</option>
+                  <option value="no" selected>No</option>
                 </select>
               </form>
               <div class="row">
@@ -186,6 +213,12 @@
                 <th>Color</th>
                 <th>Stock</th>
                 <th>Precio</th>
+                <th>Cdad Puertas</th>
+                <th>Cdad Ruedas</th>
+                <th>Cdad ocupantes</th>
+                <th>Tipo de combustible</th>
+                <th>Descapotable</th>
+
               </tr>
             </thead>
             <tbody>
@@ -196,6 +229,11 @@
                 <td th:text="${obj.color}"></td>
                 <td th:text="${obj.stock}"></td>
                 <td th:text="${obj.precio}"></td>
+                <td th:text="${obj.cantidadPuertas}"></td>
+                <td th:text="${obj.cantidadRuedas}"></td>
+                <td th:text="${obj.capacidadOcupantes}"></td>
+                <td th:text="${obj.tipoCombustible}"></td>
+                <td th:text="${obj.esDescapotable}"></td>
               </tr>
               <br />
               <br />

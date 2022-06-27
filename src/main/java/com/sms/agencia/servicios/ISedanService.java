@@ -2,7 +2,6 @@ package com.sms.agencia.servicios;
 
 import java.util.List;
 
-import com.sms.agencia.entidades.Motocicleta;
 import com.sms.agencia.entidades.Sedan;
 
 public interface ISedanService {

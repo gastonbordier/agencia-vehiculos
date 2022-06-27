@@ -8,27 +8,15 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
-
 import com.sms.agencia.entidades.Motocicleta;
-import com.sms.agencia.repositories.MotocicletaRepository;
 import com.sms.agencia.servicios.MotocicletaServiceImpl;
 
 @ControllerAdvice
@@ -42,8 +30,6 @@ public class MotoController {
 
 	private boolean panelEditarEliminarActivo = false;
 	private boolean panelAgregarActivo = false;
-	private String mensajeRespuesta = "";
-
 	@GetMapping
 	public String getListadoMotos(Model model) {
 		panelEditarEliminarActivo = false;
@@ -95,6 +81,8 @@ public class MotoController {
 
 		} else {
 			motocicletaService.grabar(motocicletaEditable);
+			model.addAttribute("hayOperacion", true);
+			model.addAttribute("mensajeOperacion", "Motocicleta editada");
 			panelEditarEliminarActivo = false;
 		}
 

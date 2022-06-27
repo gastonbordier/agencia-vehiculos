@@ -20,12 +20,12 @@ public class Sedan extends Automovil {
 		this.esDescapotable = esDescapotable;
 	}
 
-	public boolean isEsDescapotable() {
-		return esDescapotable;
+	public String getEsDescapotable() {
+		return this.esDescapotable ? "Si" : "No";
 	}
 
-	public void setEsDescapotable(boolean esDescapotable) {
-		this.esDescapotable = esDescapotable;
+	public void setEsDescapotable(String esDescapotable) {
+		this.esDescapotable = esDescapotable.toLowerCase().equals("si") ? true : false;
 	}
 
 	@Override

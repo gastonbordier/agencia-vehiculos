@@ -4,10 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
-
-import org.hibernate.annotations.Polymorphism;
-import org.hibernate.annotations.PolymorphismType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

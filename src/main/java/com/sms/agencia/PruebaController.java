@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +26,8 @@ public class PruebaController {
 	@GetMapping
 	public String getPrueba(Model model) {
 		model.addAttribute("persona", new Persona());
+		model.addAttribute("numero", 2);
+		
 		return "prueba.html";
 	}
 

@@ -1,12 +1,24 @@
 package com.sms.agencia.entidades;
 
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public class Automovil extends Vehiculo {
+	
+	@Min(value = 1, message = "La cantidad de ruedas debe ser mayor o igual a 1.")
+	@Max(value = 30, message = "La cantidad de ruedas debe ser menor o igual a 30.")
 	protected int cantidadRuedas;
+	@Min(value = 1, message = "La cantidad de puertas debe ser mayor o igual a 1.")
+	@Max(value = 10, message = "La cantidad de puertas debe ser menor o igual a 10.")
 	protected int cantidadPuertas;
+	@Min(value = 1, message = "La capacidad de ocupantes debe ser mayor o igual a 1.")
+	@Max(value = 10, message = "La capacidad de ocupantes debe ser menor o igual a 10.")
 	protected int capacidadOcupantes;
+	@Size(min = 3, message = "El tipo de combustible debe tener al menos 3 caracteres")
 	protected String tipoCombustible;
 
 	public Automovil() {

@@ -8,29 +8,15 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
-
-import com.sms.agencia.entidades.Motocicleta;
 import com.sms.agencia.entidades.Sedan;
-import com.sms.agencia.repositories.MotocicletaRepository;
-import com.sms.agencia.servicios.MotocicletaServiceImpl;
 import com.sms.agencia.servicios.SedanServiceImpl;
 
 @ControllerAdvice
@@ -44,8 +30,6 @@ public class SedanController {
 
 	private boolean panelEditarEliminarActivo = false;
 	private boolean panelAgregarActivo = false;
-	private String mensajeRespuesta = "";
-
 	@GetMapping
 	public String getListadoSedanes(Model model) {
 		panelEditarEliminarActivo = false;
@@ -71,7 +55,7 @@ public class SedanController {
 				panelEditarEliminarActivo = true;
 				panelAgregarActivo = false;
 				model.addAttribute("idBuscar", idBuscar);
-				model.addAttribute("motocicletaEditable", sedanEditable);
+				model.addAttribute("sedanEditable", sedanEditable);
 			} else {
 				model.addAttribute("hayErrores", true);
 				model.addAttribute("listaMensajesError", "El id no existe.");
@@ -90,19 +74,21 @@ public class SedanController {
 	@PostMapping(path = "/editar-eliminar", params = "accion=editar")
 	public String editar(@Valid @ModelAttribute Sedan sedanEditable, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-
+			
 			model.addAttribute("hayErrores", true);
 			model.addAttribute("listaMensajesError", obtenerMensajesError(result));
 			sedanEditable = sedanService.encontrarPorId(sedanEditable.getId());
+			model.addAttribute("sedanEditable", sedanEditable);
 
 		} else {
 			sedanService.grabar(sedanEditable);
+			model.addAttribute("hayOperacion", true);
+			model.addAttribute("mensajeOperacion", "Sedan editado");
 			panelEditarEliminarActivo = false;
 		}
 
-		model.addAttribute("sedanEditable", sedanEditable);
 		actualizarModelo(model);
-		return "sedan.html";
+		return "sedanes.html";
 	}
 
 	@PostMapping(path = "/editar-eliminar", params = "accion=eliminar")
@@ -121,6 +107,7 @@ public class SedanController {
 	public String activarPanelAgregar(Model model) {
 		panelAgregarActivo = true;
 		panelEditarEliminarActivo = false;
+		model.addAttribute("sedanNuevo", new Sedan());
 		actualizarModelo(model);
 		return "sedanes.html";
 	}
@@ -129,6 +116,8 @@ public class SedanController {
 	public String agregar(@Valid @ModelAttribute Sedan sedanNuevo, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
+			LOG.info(String.valueOf(sedanNuevo.getCapacidadOcupantes()));
+			model.addAttribute("sedanNuevo",sedanNuevo);
 			model.addAttribute("hayErrores", true);
 			model.addAttribute("listaMensajesError", obtenerMensajesError(result));
 

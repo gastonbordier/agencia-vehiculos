@@ -10,10 +10,10 @@
 
   <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-  integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../style.css">
-  
+
 </head>
 
 <body>
@@ -64,14 +64,19 @@
       </nav>
 
       <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-        <br>
-        <h2>Motocicletas</h2>
+        <br />
+
+        <div class="row">
+          <div class="col-sm-4 pb-3">
+            <h2>Motocicletas</h2>
+          </div>
+        </div>
 
         <!-- Fila con displays de encontrar por id, agregar y editar-eliminar   -->
         <div class="container">
           <div class="row">
             <!-- Columna con display de encontrar por id -->
-            <div class="col-3">
+            <div class="col-sm-4">
               <form th:action="@{~/motocicletas/activar-panel-agregar}" method="post">
                 <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">Agregar motocicleta</button>
                 <br><br>
@@ -84,23 +89,28 @@
             </div>
 
             <!-- Columna con displays de editar-eliminar -->
-            <div class="col-6" th:if="${panelEditarEliminar}">
+            <div class="col-lg p-4" th:if="${panelEditarEliminar}">
               <form th:action="@{~/motocicletas/editar-eliminar}" th:object="${motocicletaEditable}"
                 id="editar-eliminar" method="post">
+                <label for="id">Id:</label>
                 <input type="text" readonly name="id" id="id" class="form-control form-control-dark bg-light h-95"
                   th:field="*{id}">
-                <input type="text" id="marca" class="form-control form-control-dark bg-light" placeholder="Marca"
-                  th:field="*{marca}">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" class="form-control form-control-dark bg-light" th:field="*{marca}">
+                <label for="modelo">Modelo:</label>
                 <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
-                  placeholder="Modelo" th:field="*{modelo}">
+                  th:field="*{modelo}">
+                <label for="color">Color:</label>
                 <input type="text" input name="color" class="form-control form-control-dark bg-light"
-                  placeholder="Color" th:field="*{color}">
-                <input type="text" name="stock" class="form-control form-control-dark bg-light" placeholder="Stock"
-                  th:field="*{stock}">
+                  th:field="*{color}">
+                <label for="stock">Stock:</label>
+                <input type="text" name="stock" class="form-control form-control-dark bg-light" th:field="*{stock}">
+                <label for="precio">Precio:</label>
                 <input type="text" input name="precio" class="form-control form-control-dark bg-light"
-                  placeholder="Precio" th:field="*{precio}">
+                  th:field="*{precio}">
+                <label for="cilindrada">Cilindrada:</label>
                 <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
-                  placeholder="Cilindrada" th:field="*{cilindrada}">
+                  th:field="*{cilindrada}">
               </form>
               <div class="row">
                 <div class="col">
@@ -123,18 +133,23 @@
 
             <!-- Agregar -->
             <!-- Columna con displays de agregar -->
-            <div class="col-6" th:if="${panelAgregar}">
+            <div class="col-lg p-4" th:if="${panelAgregar}">
               <form th:action="@{~/motocicletas/agregar}" id="agregar" method="post">
-
+                <label for="marca">Marca:</label>
                 <input type="text" name="marca" class="form-control form-control-dark bg-light" placeholder="Marca">
+                <label for="modelo">Modelo:</label>
                 <input type="text" input name="modelo" class="form-control form-control-dark bg-light"
                   placeholder="Modelo">
+                <label for="color">Color:</label>
                 <input type="text" input name="color" class="form-control form-control-dark bg-light"
                   placeholder="Color">
+                <label for="stock">Stock:</label>
                 <input type="text" input name="stock" class="form-control form-control-dark bg-light"
                   placeholder="Stock">
+                <label for="precio">Precio:</label>
                 <input type="text" input name="precio" class="form-control form-control-dark bg-light"
                   placeholder="Precio">
+                <label for="cilindrada">Cilindrada:</label>
                 <input type="text" input name="cilindrada" class="form-control form-control-dark bg-light"
                   placeholder="Cilindrada">
               </form>

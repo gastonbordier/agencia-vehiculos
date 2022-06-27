@@ -6,17 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import com.sms.agencia.entidades.Camioneta;
 import com.sms.agencia.entidades.Motocicleta;
 import com.sms.agencia.entidades.Sedan;
 import com.sms.agencia.repositories.CamionetaRepository;
 import com.sms.agencia.repositories.MotocicletaRepository;
 import com.sms.agencia.repositories.SedanRepository;
-import com.sms.agencia.repositories.VehiculoRepository;
 
 @SpringBootApplication
 //@EntityScan("com.sms.agencia.entidades")
@@ -35,11 +30,8 @@ public class AgenciaApplication implements CommandLineRunner {
 	private SedanRepository sedanRepository;
 	@Autowired
 	private CamionetaRepository camionetaRepository;
-	@Autowired
-	private VehiculoRepository vehiculoRepository;
 
-
-//	@Bean
+	// @Bean
 	public int hardcode() {
 		motocicletaRepository.save(new Motocicleta("Benelli", "Tnt 600 I", "Blanco", 5, 2930000, 600));
 		motocicletaRepository.save(new Motocicleta("Keller", "Crono Classic", "Rojo", 8, 149990, 110));
