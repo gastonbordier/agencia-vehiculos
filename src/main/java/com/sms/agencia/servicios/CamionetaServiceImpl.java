@@ -5,29 +5,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sms.agencia.entidades.Motocicleta;
-import com.sms.agencia.repositories.MotocicletaRepository;
+import com.sms.agencia.entidades.Camioneta;
+import com.sms.agencia.entidades.Sedan;
+import com.sms.agencia.repositories.CamionetaRepository;
+import com.sms.agencia.repositories.SedanRepository;
 
 @Service
-public class MotocicletaServiceImpl implements IVehiculoService<Motocicleta>{
+public class CamionetaServiceImpl implements IVehiculoService<Camioneta> {
 
 	@Autowired
-	private MotocicletaRepository repository;
+	private CamionetaRepository repository;
 	
 	@Override
-	public List<Motocicleta> listar() {
+	public List<Camioneta> listar() {
 		return repository.findAll();
 	}
 	
 	@Override
-	public void grabar(Motocicleta motocicleta) {
-		repository.save(motocicleta);
+	public void grabar(Camioneta camioneta) {
+		repository.save(camioneta);
 		
 	}
 
-
 	@Override
-	public Motocicleta encontrarPorId(int id) {
+	public Camioneta encontrarPorId(int id) {
 		return repository.findById(id).get();
 	}
 

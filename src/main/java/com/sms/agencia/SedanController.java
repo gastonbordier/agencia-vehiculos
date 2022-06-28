@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.sms.agencia.entidades.Sedan;
+import com.sms.agencia.servicios.CamionetaServiceImpl;
 import com.sms.agencia.servicios.SedanServiceImpl;
 
 @ControllerAdvice
@@ -30,6 +31,7 @@ public class SedanController {
 
 	private boolean panelEditarEliminarActivo = false;
 	private boolean panelAgregarActivo = false;
+
 	@GetMapping
 	public String getListadoSedanes(Model model) {
 		panelEditarEliminarActivo = false;
@@ -74,7 +76,7 @@ public class SedanController {
 	@PostMapping(path = "/editar-eliminar", params = "accion=editar")
 	public String editar(@Valid @ModelAttribute Sedan sedanEditable, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			
+
 			model.addAttribute("hayErrores", true);
 			model.addAttribute("listaMensajesError", obtenerMensajesError(result));
 			sedanEditable = sedanService.encontrarPorId(sedanEditable.getId());
@@ -117,7 +119,7 @@ public class SedanController {
 
 		if (result.hasErrors()) {
 			LOG.info(String.valueOf(sedanNuevo.getCapacidadOcupantes()));
-			model.addAttribute("sedanNuevo",sedanNuevo);
+			model.addAttribute("sedanNuevo", sedanNuevo);
 			model.addAttribute("hayErrores", true);
 			model.addAttribute("listaMensajesError", obtenerMensajesError(result));
 

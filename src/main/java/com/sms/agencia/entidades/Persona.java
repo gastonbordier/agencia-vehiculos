@@ -41,9 +41,9 @@ public class Persona {
 		this.nombre = nombre;
 	}
 
-	@Override
-	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Persona [id=" + id + ", nombre=" + nombre + "]";
+//	}
 
 }

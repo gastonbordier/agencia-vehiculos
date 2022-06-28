@@ -30,6 +30,7 @@ public class MotoController {
 
 	private boolean panelEditarEliminarActivo = false;
 	private boolean panelAgregarActivo = false;
+	
 	@GetMapping
 	public String getListadoMotos(Model model) {
 		panelEditarEliminarActivo = false;

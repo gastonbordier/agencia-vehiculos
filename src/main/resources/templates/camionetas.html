@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="" />
   <meta name="author" content="Gaston Bordier" />
-  <title>Agencia de Autos - Sedanes</title>
+  <title>Agencia de Autos - Camionetas</title>
 
   <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
@@ -46,13 +46,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/sedanes">
+              <a class="nav-link" href="/sedanes">
                 <span data-feather="sedanes"></span>
                 Sedanes
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/camionetas">
+              <a class="nav-link active" href="/camionetas">
                 <span data-feather="camios"></span>
                 Camionetas
               </a>
@@ -66,7 +66,7 @@
 
         <div class="row">
           <div class="col-sm-4 pb-3">
-            <div class="h2">Sedanes</div>
+            <div class="h2">Camionetas</div>
           </div>
         </div>
 
@@ -75,25 +75,25 @@
           <div class="row">
             <!-- Columna con display de encontrar por id -->
             <div class="col-sm-4">
-              <form th:action="@{~/sedanes/activar-panel-agregar}" method="post">
+              <form th:action="@{~/camionetas/activar-panel-agregar}" method="post">
                 <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">
-                  Agregar sedan
+                  Agregar camionetas
                 </button>
                 <br /><br />
               </form>
-              <form method="post" th:action="@{~/sedanes/obtener-por-id}" id="obtener-por-id">
+              <form method="post" th:action="@{~/camionetas/obtener-por-id}" id="obtener-por-id">
                 <input type="text" class="form-control form-control-dark bg-light" placeholder="Insertar id"
                   name="idBuscar" />
                 <button type="submit" class="btn btn-sm btn-outline-secondary text-dark">
-                  Buscar sedan
+                  Buscar camionetas
                 </button>
               </form>
             </div>
 
             <!-- Columna con displays de editar-eliminar -->
             <div class="col-lg p-4" th:if="${panelEditarEliminar}">
-              <div class="h5">Editar Sedan:</div>
-              <form th:action="@{~/sedanes/editar-eliminar}" th:object="${sedanEditable}" id="editar-eliminar"
+              <div class="h5">Editar Camionetas:</div>
+              <form th:action="@{~/camionetas/editar-eliminar}" th:object="${camionetaEditable}" id="editar-eliminar"
                 method="post">
                 <label for="id">Id:</label>
                 <input readonly type="text" name="id" class="form-control form-control-dark bg-light"
@@ -124,12 +124,13 @@
                 <label for="tipoCombustible">Tipo de combustible:</label>
                 <input type="text" input name="tipoCombustible" class="form-control form-control-dark bg-light"
                   th:field="*{tipoCombustible}" />
-                <label for="esDescapotable">Es descapotable?</label>
-                <select multiple size="2" class="form-select form-control-dark bg-light" name="esDescapotable"
-                  th:field="*{esDescapotable}">
-                  <option value="si">Si</option>
-                  <option value="no">No</option>
-                </select>
+                <label for="taraToneladas">Tara(Toneladas):</label>
+                <input type="text" input name="taraToneladas" class="form-control form-control-dark bg-light"
+                  th:field="*{taraToneladas}" />
+                <label for="capacidadToneladas">Capacidad(Toneladas):</label>
+                <input type="text" input name="capacidadToneladas" class="form-control form-control-dark bg-light"
+                  th:field="*{capacidadToneladas}" />
+
               </form>
               <div class="row">
                 <div class="col">
@@ -146,7 +147,7 @@
                 </div>
 
                 <div class="col">
-                  <form method="post" th:action="@{~/sedanes/cancelar}">
+                  <form method="post" th:action="@{~/camionetas/cancelar}">
                     <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">
                       Cancelar
                     </button>
@@ -157,8 +158,8 @@
 
             <!-- Columna con displays de agregar -->
             <div class="col-lg p-4" th:if="${panelAgregar}">
-              <div class="h5">Agregar Sedan:</div>
-              <form th:action="@{~/sedanes/agregar}" id="agregar" method="post">
+              <div class="h5">Agregar Camionetas:</div>
+              <form th:action="@{~/camionetas/agregar}" id="agregar" method="post">
                 <label for="marca">Marca:</label>
                 <input type="text" name="marca" class="form-control form-control-dark bg-light" />
                 <label for="modelo">Modelo:</label>
@@ -174,15 +175,13 @@
                 <label for="cantidadRuedas">Cantidad de ruedas:</label>
                 <input type="text" input name="cantidadRuedas" class="form-control form-control-dark bg-light" />
                 <label for="capacidadOcupantes">Cantidad de ocupantes:</label>
-                <input type="text" input name="capacidadOcupantes" class="form-control form-control-dark bg-light"
-                  th:value="${sedanNuevo.capacidadOcupantes}" />
+                <input type="text" input name="capacidadOcupantes" class="form-control form-control-dark bg-light" />
                 <label for="tipoCombustible">Tipo de combustible:</label>
                 <input type="text" input name="tipoCombustible" class="form-control form-control-dark bg-light" />
-                <label for="esDescapotable">Es descapotable?</label>
-                <select class="form-select form-control-dark bg-light" name="esDescapotable">
-                  <option value="si">Si</option>
-                  <option value="no" selected>No</option>
-                </select>
+                <label for="taraToneladas">Tara(Toneladas):</label>
+                <input type="text" input name="taraToneladas" class="form-control form-control-dark bg-light" />
+                <label for="capacidadToneladas">Capacidad(Toneladas):</label>
+                <input type="text" input name="capacidadToneladas" class="form-control form-control-dark bg-light" />
               </form>
               <div class="row">
                 <div class="col">
@@ -192,7 +191,7 @@
                   </button>
                 </div>
                 <div class="col">
-                  <form method="post" th:action="@{~/sedanes/cancelar}">
+                  <form method="post" th:action="@{~/camionetas/cancelar}">
                     <button type="submit" class="btn btn-sm btn-outline-secondary text-dark w-100">
                       Cancelar
                     </button>
@@ -217,7 +216,9 @@
                 <th>Cdad Ruedas</th>
                 <th>Cdad ocupantes</th>
                 <th>Tipo de combustible</th>
-                <th>Descapotable</th>
+                <th>Tara(Toneladas)</th>
+                <th>Capacidad(Toneladas)</th>
+
 
               </tr>
             </thead>
@@ -233,7 +234,9 @@
                 <td th:text="${obj.cantidadRuedas}"></td>
                 <td th:text="${obj.capacidadOcupantes}"></td>
                 <td th:text="${obj.tipoCombustible}"></td>
-                <td th:text="${obj.esDescapotable}"></td>
+                <td th:text="${obj.taraToneladas}"></td>
+                <td th:text="${obj.capacidadToneladas}"></td>
+
               </tr>
               <br />
               <br />
@@ -246,12 +249,12 @@
 
   <div class="alert alert-warning alert-dismissible fade show fixed-bottom" role="alert" th:if="${hayErrores}">
     <div th:each="mensaje : ${listaMensajesError}">
-      <strong th:text="${mensaje}">asdasd</strong>
+      <strong th:text="${mensaje}"></strong>
     </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   <div class="alert alert-info alert-dismissible fade show fixed-bottom" role="alert" th:if="${hayOperacion}">
-    <strong th:text="${mensajeOperacion}">asdasd</strong>
+    <strong th:text="${mensajeOperacion}"></strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 

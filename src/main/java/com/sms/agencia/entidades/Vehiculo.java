@@ -1,5 +1,8 @@
 package com.sms.agencia.entidades;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,21 +24,20 @@ public class Vehiculo {
 
 	@Size(min = 3, message = "La marca debe tener al menos 3 caracteres")
 	protected String marca;
-	
+
 	@Column(unique = true)
 	@Size(min = 3, message = "El modelo debe tener al menos 3 caracteres")
 	protected String modelo;
-	
+
 	@Size(min = 3, message = "El color debe tener al menos 3 caracteres")
 	protected String color;
-	
+
 	@PositiveOrZero(message = "El stock no puede ser un numero negativo")
 	protected int stock;
 
 	@Column(columnDefinition = "decimal(10,2)")
 	@Positive(message = "El precio no puede ser un numero negativo ni cero")
 	protected float precio;
-	
 
 	public Vehiculo() {
 	}
@@ -82,6 +84,11 @@ public class Vehiculo {
 
 	public float getPrecio() {
 		return precio;
+	}
+
+	public String getPrecioString() {
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		return formatter.format(getPrecio());
 	}
 
 	public void setPrecio(float precio) {

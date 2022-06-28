@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sms.agencia.entidades.Camioneta;
 import com.sms.agencia.entidades.Sedan;
+import com.sms.agencia.entidades.Vehiculo;
+import com.sms.agencia.repositories.CamionetaRepository;
 import com.sms.agencia.repositories.SedanRepository;
 
 @Service
-public class SedanServiceImpl implements ISedanService {
+public class SedanServiceImpl implements IVehiculoService<Sedan> {
 
 	@Autowired
 	private SedanRepository repository;
