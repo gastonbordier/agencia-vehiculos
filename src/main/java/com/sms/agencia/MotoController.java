@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.sms.agencia.entidades.Motocicleta;
-import com.sms.agencia.servicios.MotocicletaServiceImpl;
+import com.sms.agencia.servicios.MotocicletaService;
 
 @ControllerAdvice
 @RequestMapping("/motocicletas")
@@ -26,7 +26,7 @@ public class MotoController {
 	private static Logger LOG = LoggerFactory.getLogger(AgenciaApplication.class);
 
 	@Autowired
-	private MotocicletaServiceImpl motocicletaService;
+	private MotocicletaService motocicletaService;
 
 	private boolean panelEditarEliminarActivo = false;
 	private boolean panelAgregarActivo = false;

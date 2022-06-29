@@ -10,12 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Vehiculo {
 
 	@Id
@@ -38,6 +39,12 @@ public class Vehiculo {
 	@Column(columnDefinition = "decimal(10,2)")
 	@Positive(message = "El precio no puede ser un numero negativo ni cero")
 	protected float precio;
+	
+	@Lob
+    @Column(length = Integer.MAX_VALUE, nullable = true)
+    private byte[] imagen;
+
+	
 
 	public Vehiculo() {
 	}
@@ -101,6 +108,14 @@ public class Vehiculo {
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
+	}
+	
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 
 	@Override

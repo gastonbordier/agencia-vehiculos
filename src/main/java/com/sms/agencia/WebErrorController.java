@@ -19,7 +19,6 @@ public class WebErrorController implements ErrorController {
 		int codigoError = (Integer)request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		LOG.info((String.valueOf(codigoError)));
 		
-		
 		model.addAttribute("codigoError", codigoError);
 		return "error.html";
 	}

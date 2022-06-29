@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sms.agencia.entidades.Camioneta;
-import com.sms.agencia.servicios.CamionetaServiceImpl;
+import com.sms.agencia.servicios.CamionetaService;
 
 @ControllerAdvice
 @RequestMapping("/camionetas")
@@ -27,7 +27,7 @@ public class CamionetaController {
 	private static Logger LOG = LoggerFactory.getLogger(AgenciaApplication.class);
 
 	@Autowired
-	private CamionetaServiceImpl camionetaService;
+	private CamionetaService camionetaService;
 
 	private boolean panelEditarEliminarActivo = false;
 	private boolean panelAgregarActivo = false;

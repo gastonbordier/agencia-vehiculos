@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
 import com.sms.agencia.entidades.Camioneta;
 import com.sms.agencia.entidades.Motocicleta;
 import com.sms.agencia.entidades.Sedan;
@@ -31,7 +33,7 @@ public class AgenciaApplication implements CommandLineRunner {
 	@Autowired
 	private CamionetaRepository camionetaRepository;
 
-	// @Bean
+//	@Bean
 	public int hardcode() {
 		motocicletaRepository.save(new Motocicleta("Benelli", "Tnt 600 I", "Blanco", 5, 2930000, 600));
 		motocicletaRepository.save(new Motocicleta("Keller", "Crono Classic", "Rojo", 8, 149990, 110));
