@@ -1,5 +1,6 @@
 package com.sms.agencia;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sms.agencia.entidades.Motocicleta;
 import com.sms.agencia.servicios.MotocicletaService;
 
@@ -30,7 +34,7 @@ public class MotoController {
 
 	private boolean panelEditarEliminarActivo = false;
 	private boolean panelAgregarActivo = false;
-	
+
 	@GetMapping
 	public String getListadoMotos(Model model) {
 		panelEditarEliminarActivo = false;
@@ -73,7 +77,8 @@ public class MotoController {
 	}
 
 	@PostMapping(path = "/editar-eliminar", params = "accion=editar")
-	public String editar(@Valid @ModelAttribute Motocicleta motocicletaEditable, BindingResult result, Model model) {
+	public String editar(@Valid @ModelAttribute Motocicleta motocicletaEditable,
+			@RequestParam("file") MultipartFile file, BindingResult result, Model model) throws IOException {
 		if (result.hasErrors()) {
 
 			model.addAttribute("hayErrores", true);
@@ -81,6 +86,7 @@ public class MotoController {
 			motocicletaEditable = motocicletaService.encontrarPorId(motocicletaEditable.getId());
 
 		} else {
+			motocicletaEditable.setImagen(file.getBytes());
 			motocicletaService.grabar(motocicletaEditable);
 			model.addAttribute("hayOperacion", true);
 			model.addAttribute("mensajeOperacion", "Motocicleta editada");

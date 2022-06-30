@@ -30,7 +30,7 @@
   <div class="container-fluid">
     <div class="row">
       <!-- Menu al costado -->
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <nav id="sidebarMenu" class="sidebar col-md-3 col-lg-2 d-md-block bg-light collapse">
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -133,8 +133,8 @@
                 <label for="esDescapotable">Es descapotable?</label>
                 <select multiple size="2" class="form-select form-control-dark bg-light" name="esDescapotable"
                   th:field="*{esDescapotable}">
-                  <option value="si">Si</option>
-                  <option value="no">No</option>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
                 </select>
               </form>
               <div class="row">
@@ -189,6 +189,8 @@
                   <option value="si">Si</option>
                   <option value="no" selected>No</option>
                 </select>
+                <label for="avatar">Imagen del vehiculo:</label>
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
               </form>
               <div class="row">
                 <div class="col">
