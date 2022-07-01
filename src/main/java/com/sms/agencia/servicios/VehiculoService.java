@@ -1,5 +1,6 @@
 package com.sms.agencia.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,33 +10,44 @@ import com.sms.agencia.entidades.Vehiculo;
 import com.sms.agencia.repositories.VehiculoRepository;
 
 @Service
-public class VehiculoService implements IVehiculoService<Vehiculo> {
+public class VehiculoService{
 	
 	@Autowired
 	private VehiculoRepository repository;
 
-	@Override
 	public void grabar(Vehiculo entidad) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public List<Vehiculo> listar() {
 		return repository.findAll();
 	}
+	
+	public List<Vehiculo> listarTresVehiculosAleatorios() {
+		List<Vehiculo> listaAleatoria = new ArrayList<>();
+		int cantidadAutos = this.listar().size();
 
-	@Override
+		int[] numerosRandom = new int[3];
+		for (int i = 0; i < numerosRandom.length; i++) {
+			numerosRandom[i] = (int) (Math.random() * (cantidadAutos - 1) + 1);
+			listaAleatoria.add(encontrarPorId(numerosRandom[i]));
+		}
+		
+		
+		return listaAleatoria;
+	}
+	
+	
+
 	public Vehiculo encontrarPorId(int id) {
 		return repository.findById(id).get();
 	}
 
-	@Override
 	public void eliminarPorId(int id) {
 		repository.deleteById(id);;
 	}
 
-	@Override
 	public boolean existeId(int id) {
 		return repository.existsById(id);
 	}
